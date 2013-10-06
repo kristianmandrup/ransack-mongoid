@@ -14,7 +14,9 @@ Someday when it works...
 
 In your Gemfile:
 
-    gem "ransack-mongoid"  # Last officially released gem
+```ruby
+gem "ransack-mongoid"  # Last officially released gem
+```
 
 
 ## Usage
@@ -25,20 +27,24 @@ See the [Ransack README](https://github.com/ernie/ransack) for more info.
 
 In your controller:
 
-    def index
-      @q = Person.search(params[:q])
-      @people = @q.result(:distinct => true)
-    end
+```ruby
+def index
+  @q = Person.search(params[:q])
+  @people = @q.result(:distinct => true)
+end
+```
 
 In your view:
 
-    <%= search_form_for @q do |f| %>
-      <%= f.label :name_cont %>
-      <%= f.text_field :name_cont %>
-      <%= f.label :articles_title_start %>
-      <%= f.text_field :articles_title_start %>
-      <%= f.submit %>
-    <% end %>
+```erb
+<%= search_form_for @q do |f| %>
+  <%= f.label :name_cont %>
+  <%= f.text_field :name_cont %>
+  <%= f.label :articles_title_start %>
+  <%= f.text_field :articles_title_start %>
+  <%= f.submit %>
+<% end %>
+```
 
 `cont` (contains) and `start` (starts with) are just two of the available search predicates.
 See Constants for a full list.
@@ -79,11 +85,11 @@ Uses the `after :save` hook to update an embedded index of relational attributes
 Chained relations?:
 
 ```ruby
-  search_field :reviewers do
-    index :name, :rating
+search_field :reviewers do
+  index :name, :rating
 
-    search_field :boss, for: %w{name title}    
-  end  
+  search_field :boss, for: %w{name title}    
+end  
 ```
 
 In the above example, the for option is a shorthand for a single index of attributes.
